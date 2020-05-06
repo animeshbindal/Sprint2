@@ -8,16 +8,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="ADMIN")
 
 public class Admin {
+	
 	@Id
 	@Column(name="ADMIN_ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int adminid;
 	
+	@NotEmpty(message="Name can't be empty")
 	@Column(name="ADMIN_NAME")
 	private String adminName;
 	
