@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -24,8 +26,8 @@ public class Show {
 	@Column(name = "Show_Id")
 	private int showId;
 	
-	@Column(name = "Seats")
-	private Seat[] seats;
+//	@Column(name = "Seats")
+//	private Seat[] seats;
 	
 	@NotEmpty(message="Show name can't be empty")
 	@Column(name="Show_Name")
@@ -47,7 +49,14 @@ public class Show {
 	@JoinColumn(name = "Theater_Id",referencedColumnName = "Theater_Id")
 	private Screen theaterId;
 
+	@OneToOne(mappedBy = "showId")
+	public Booking booking;
 	
+	@OneToMany(mappedBy = "seats")
+	public Seat[] seats;
+
+	@OneToOne(mappedBy = "show")
+	private Movie movie;
 	public int getShowId() {
 		return showId;
 	}
@@ -56,16 +65,32 @@ public class Show {
 		this.showId = showId;
 	}
 
+//	public Seat[] getSeats() {
+//		return seats;
+//	}
+//
+//	public void setSeats(Seat[] seats) {
+//		this.seats = seats;
+//	}
+
+	public String getShowName() {
+		return showName;
+	}
+
+	public Booking getBooking() {
+		return booking;
+	}
+
+	public void setBooking(Booking booking) {
+		this.booking = booking;
+	}
+
 	public Seat[] getSeats() {
 		return seats;
 	}
 
 	public void setSeats(Seat[] seats) {
 		this.seats = seats;
-	}
-
-	public String getShowName() {
-		return showName;
 	}
 
 	public void setShowName(String showName) {

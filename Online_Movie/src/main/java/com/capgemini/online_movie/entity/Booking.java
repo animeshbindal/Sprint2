@@ -33,7 +33,6 @@ public class Booking {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="Show_Show_Id")
-	
 	public Show showId;
 	
 	@Column
@@ -58,12 +57,11 @@ public class Booking {
 	(name="Seat_List")
 	public Seat[] seatList;
 	
-	@OneToOne(targetEntity = Ticket.class, cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "booking")
 	@JoinColumn(name="Ticket")
 	public Ticket ticket;
 
-	 
-
+	
 	public int getBookingId() {
 		return bookingId;
 	}

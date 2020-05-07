@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @Table(name="ADMIN")
 
-public class Admin {
+public class Admin extends User {
 	
 	@Id
 	@Column(name="ADMIN_ID")

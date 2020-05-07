@@ -1,10 +1,12 @@
 package com.capgemini.online_movie.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +31,9 @@ public class Ticket {
 	
 	@Column(name="Screen_Name")
 	public String screenName;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Booking booking;
 
 	public int getTicketId() {
 		return ticketId;

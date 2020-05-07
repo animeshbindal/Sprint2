@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="CUSTOMER")
-public class Customer {
+public class Customer extends User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="Customer_Id")

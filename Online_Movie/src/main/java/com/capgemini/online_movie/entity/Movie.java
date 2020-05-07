@@ -1,13 +1,17 @@
 package com.capgemini.online_movie.entity;
 
-import java.time.LocalDate;
-import java.util.Arrays;
 
+import java.util.Arrays;
+import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -26,19 +30,23 @@ public class Movie {
 	private String movieName;
 	
 	@Column(name="Movie_Genre")
-	private Show[] movieGenre;
+	private String movieGenre;
 	
 	@Column(name="Movie_Director")
-	private LocalDate movieDirector;
+	private String movieDirector;
 	
 	@Column(name="Movie_length")
-	public int movieLength;
+	private int movieLength;
 	
 	@Column(name="Languages")
-	public String[] languages;
+	private String[] languages;
 	
 	@Column(name="Movie_Release_Date")
-	public LocalDate movieReleaseDate;
+	private Date movieReleaseDate;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="movieName")
+	private Show show;
 
 	public int getMovieId() {
 		return movieId;
@@ -56,19 +64,19 @@ public class Movie {
 		this.movieName = movieName;
 	}
 
-	public Show[] getMovieGenre() {
+	public String getMovieGenre() {
 		return movieGenre;
 	}
 
-	public void setMovieGenre(Show[] movieGenre) {
+	public void setMovieGenre(String movieGenre) {
 		this.movieGenre = movieGenre;
 	}
 
-	public LocalDate getMovieDirector() {
+	public String getMovieDirector() {
 		return movieDirector;
 	}
 
-	public void setMovieDirector(LocalDate movieDirector) {
+	public void setMovieDirector(String movieDirector) {
 		this.movieDirector = movieDirector;
 	}
 
@@ -88,16 +96,16 @@ public class Movie {
 		this.languages = languages;
 	}
 
-	public LocalDate getMovieReleaseDate() {
+	public Date getMovieReleaseDate() {
 		return movieReleaseDate;
 	}
 
-	public void setMovieReleaseDate(LocalDate movieReleaseDate) {
+	public void setMovieReleaseDate(Date movieReleaseDate) {
 		this.movieReleaseDate = movieReleaseDate;
 	}
 
-	public Movie(int movieId, String movieName, Show[] movieGenre, LocalDate movieDirector, int movieLength,
-			String[] languages, LocalDate movieReleaseDate) {
+	public Movie(int movieId, String movieName, String movieGenre, String movieDirector, int movieLength,
+			String[] languages, Date movieReleaseDate) {
 		super();
 		this.movieId = movieId;
 		this.movieName = movieName;
@@ -110,7 +118,7 @@ public class Movie {
 
 	@Override
 	public String toString() {
-		return "Movie [movieId=" + movieId + ", movieName=" + movieName + ", movieGenre=" + Arrays.toString(movieGenre)
+		return "Movie [movieId=" + movieId + ", movieName=" + movieName + ", movieGenre=" + movieGenre
 				+ ", movieDirector=" + movieDirector + ", movieLength=" + movieLength + ", languages="
 				+ Arrays.toString(languages) + ", movieReleaseDate=" + movieReleaseDate + "]";
 	}
