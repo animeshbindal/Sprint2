@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="CUSTOMER")
@@ -18,9 +20,11 @@ public class Customer {
 	@Column(name="Customer_Id")
 	private String customerId;
 	
+	@NotEmpty(message="Customer name can't be empty")
 	@Column(name = "Customer_Name")
 	private String customerName;
 	
+	@NotEmpty(message="Password can't be null")
 	@Column(name = "Customer_Password")
 	private String customerPassword;
 	
@@ -78,6 +82,17 @@ public class Customer {
 	}
 
 	public void setCustomerContact(String customerContact) {
+		this.customerContact = customerContact;
+	}
+
+	public Customer(String customerId, String customerName, String customerPassword, LocalDate dateOfBirth,
+			List<Ticket> myTickets, String customerContact) {
+		super();
+		this.customerId = customerId;
+		this.customerName = customerName;
+		this.customerPassword = customerPassword;
+		this.dateOfBirth = dateOfBirth;
+		this.myTickets = myTickets;
 		this.customerContact = customerContact;
 	}
 	

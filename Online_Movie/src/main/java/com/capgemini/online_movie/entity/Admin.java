@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name="ADMIN")
 
@@ -28,13 +30,14 @@ public class Admin {
 	@Column(name="ADMIN_PASSWORD")
 	private String adminpassword;
 	
-	@Column(name="DATE_OF_BIRTH")
-	private LocalDate dateOfBirth;
-	
+//	@Column(name="DATE_OF_BIRTH")
+//	@JsonFormat(pattern="yyyy-MM-DD")
+//	private LocalDate dateOfBirth;
+//	
 	@Column(name="ADMIN_CONTACT")
 	private String adminContact;
 
-	public int getAdminid() {
+	public int Adminid() {
 		return adminid;
 	}
 
@@ -58,13 +61,13 @@ public class Admin {
 		this.adminpassword = adminpassword;
 	}
 
-	public LocalDate getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	public void setDateOfBirth(LocalDate dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
+//	public LocalDate getDateOfBirth() {
+//		return dateOfBirth;
+//	}
+//
+//	public void setDateOfBirth(LocalDate dateOfBirth) {
+//		this.dateOfBirth = dateOfBirth;
+//	}
 
 	public String getAdminContact() {
 		return adminContact;
@@ -73,5 +76,16 @@ public class Admin {
 	public void setAdminContact(String adminContact) {
 		this.adminContact = adminContact;
 	}
+
+	public Admin(int adminid, @NotEmpty(message = "Name can't be empty") String adminName, String adminpassword,
+			 String adminContact) {
+		super();
+		this.adminid = adminid;
+		this.adminName = adminName;
+		this.adminpassword = adminpassword;
+//		this.dateOfBirth = dateOfBirth;
+		this.adminContact = adminContact;
+	}
+	
 
 }

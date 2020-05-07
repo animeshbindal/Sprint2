@@ -1,6 +1,7 @@
 package com.capgemini.online_movie.entity;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
 
 @Entity
 @Table(name="MOVIE")
@@ -16,16 +19,17 @@ public class Movie {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column (name = "Movie_Id")
-	public int movieId;
+	private int movieId;
 	
+	@NotEmpty(message="Movie Name can't be empty")
 	@Column(name="Movie_Name")
-	public String movieName;
+	private String movieName;
 	
 	@Column(name="Movie_Genre")
-	public Show[] movieGenre;
+	private Show[] movieGenre;
 	
 	@Column(name="Movie_Director")
-	public LocalDate movieDirector;
+	private LocalDate movieDirector;
 	
 	@Column(name="Movie_length")
 	public int movieLength;
@@ -90,6 +94,25 @@ public class Movie {
 
 	public void setMovieReleaseDate(LocalDate movieReleaseDate) {
 		this.movieReleaseDate = movieReleaseDate;
+	}
+
+	public Movie(int movieId, String movieName, Show[] movieGenre, LocalDate movieDirector, int movieLength,
+			String[] languages, LocalDate movieReleaseDate) {
+		super();
+		this.movieId = movieId;
+		this.movieName = movieName;
+		this.movieGenre = movieGenre;
+		this.movieDirector = movieDirector;
+		this.movieLength = movieLength;
+		this.languages = languages;
+		this.movieReleaseDate = movieReleaseDate;
+	}
+
+	@Override
+	public String toString() {
+		return "Movie [movieId=" + movieId + ", movieName=" + movieName + ", movieGenre=" + Arrays.toString(movieGenre)
+				+ ", movieDirector=" + movieDirector + ", movieLength=" + movieLength + ", languages="
+				+ Arrays.toString(languages) + ", movieReleaseDate=" + movieReleaseDate + "]";
 	}
 	
 	

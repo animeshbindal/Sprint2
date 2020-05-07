@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="USER")
-public class User {
+public class User   {
 	
 	@Id
 	@Column(name="USER_ID")
@@ -39,4 +39,5 @@ public class User {
 		this.password = password;
 	}
 
+	
 }

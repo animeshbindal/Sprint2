@@ -2,13 +2,14 @@ package com.capgemini.online_movie.entity;
 
 import java.time.LocalDate;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -19,22 +20,21 @@ public class Booking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="Booking_Id")
-	@NotNull
+	
 	public int bookingId;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column
-	(name="Movie_Id")
-	@NotNull
+	@Column(name="Movie_Id")
+	
 	public int movieId;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column
-	(name="Show_Id")
-	@NotNull
-	public int showId;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="Show_Show_Id")
+	
+	public Show showId;
 	
 	@Column
 	(name="Show_Ref")
@@ -58,12 +58,11 @@ public class Booking {
 	(name="Seat_List")
 	public Seat[] seatList;
 	
-	
-	@OneToMany
-	@Column
-	(name="Ticket")
+	@OneToOne(targetEntity = Ticket.class, cascade = CascadeType.ALL)
+	@JoinColumn(name="Ticket")
 	public Ticket ticket;
 
+	 
 
 	public int getBookingId() {
 		return bookingId;
@@ -85,12 +84,12 @@ public class Booking {
 	}
 
 
-	public int getShowId() {
+	public Show getShowId() {
 		return showId;
 	}
 
 
-	public void setShowId(int showId) {
+	public void setShowId(Show showId) {
 		this.showId = showId;
 	}
 
@@ -153,5 +152,21 @@ public class Booking {
 	public void setTicket(Ticket ticket) {
 		this.ticket = ticket;
 	}
+
+
+	public Booking(@NotNull int bookingId, @NotNull int movieId, @NotNull Show showId, Show showRef,
+			LocalDate bookingDate, int transactionId, double totalCost, Seat[] seatList, Ticket ticket) {
+		super();
+		this.bookingId = bookingId;
+		this.movieId = movieId;
+		this.showId = showId;
+		this.showRef = showRef;
+		this.bookingDate = bookingDate;
+		this.transactionId = transactionId;
+		this.totalCost = totalCost;
+		this.seatList = seatList;
+		this.ticket = ticket;
+	}
+	
 	
 }
