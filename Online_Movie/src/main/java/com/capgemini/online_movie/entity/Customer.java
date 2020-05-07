@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
 
 @Entity
 @Table(name="CUSTOMER")
@@ -94,6 +94,13 @@ public class Customer extends User {
 		this.dateOfBirth = dateOfBirth;
 		this.myTickets = myTickets;
 		this.customerContact = customerContact;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", customerPassword="
+				+ customerPassword + ", dateOfBirth=" + dateOfBirth + ", myTickets=" + myTickets + ", customerContact="
+				+ customerContact + "]";
 	}
 	
 	

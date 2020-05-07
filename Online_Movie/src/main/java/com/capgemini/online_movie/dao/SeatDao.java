@@ -2,8 +2,8 @@ package com.capgemini.online_movie.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.capgemini.online_movie.entity.Show;
+import com.capgemini.online_movie.entity.Seat;
 
-public interface ShowDao extends JpaRepository<Show, Integer> {
+public interface SeatDao extends JpaRepository<Seat, Integer> {
 
 }
