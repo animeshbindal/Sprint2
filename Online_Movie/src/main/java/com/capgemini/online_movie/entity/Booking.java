@@ -1,6 +1,7 @@
 package com.capgemini.online_movie.entity;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,23 +22,23 @@ public class Booking {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="Booking_Id")
 	
-	public int bookingId;
+	private int bookingId;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="Movie_Id")
 	
-	public int movieId;
+	private int movieId;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="Show_Show_Id")
-	public Show showId;
+	private Show showId;
 	
 	@Column
 	(name="Show_Ref")
-	public Show showRef;
+	private Show showRef;
 	
 	@Column
 	(name="Booking_Date")
@@ -47,19 +48,19 @@ public class Booking {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	(name="Transaction_Id")
-	public int transactionId;
+	private int transactionId;
 	
 	@Column
 	(name="Total_Cost")
-	public double totalCost;
+	private double totalCost;
 	
 	@Column
 	(name="Seat_List")
-	public Seat[] seatList;
+	private Seat[] seatList;
 	
 	@OneToOne(mappedBy = "booking")
 	@JoinColumn(name="Ticket")
-	public Ticket ticket;
+	private Ticket ticket;
 
 	
 	public int getBookingId() {
@@ -164,6 +165,14 @@ public class Booking {
 		this.totalCost = totalCost;
 		this.seatList = seatList;
 		this.ticket = ticket;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Booking [bookingId=" + bookingId + ", movieId=" + movieId + ", showId=" + showId + ", showRef="
+				+ showRef + ", bookingDate=" + bookingDate + ", transactionId=" + transactionId + ", totalCost="
+				+ totalCost + ", seatList=" + Arrays.toString(seatList) + ", ticket=" + ticket + "]";
 	}
 	
 	
