@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.OneToMany;
@@ -23,16 +25,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Show {
 	@Id
 	@Column(name="show_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int showId;
 	@Column(name="show_name", length=25)
 	private String showName;
 	
 	@Column(name="show_start_time")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime showstartTime;
 	
 	@Column(name="show_end_time")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime showendTime;
 	
 	@Column(name="total_no_of_seats")
@@ -41,9 +44,9 @@ public class Show {
 	@Column(name="no_available_seats")
 	private int noOfAvailableSeats;
 	
-	@OneToMany(fetch=FetchType.EAGER)
-	@JsonIgnore
-	private List<Seat> seats;
+	@OneToOne(fetch=FetchType.EAGER)
+	
+	private Seat seats;
 	
 	@OneToOne(fetch=FetchType.EAGER)
 	
@@ -58,7 +61,7 @@ public class Show {
 	}
 
 	public Show(int showId, String showName, LocalDateTime showstartTime, LocalDateTime showendTime, int totalNoOfSeats,
-			int noOfAvailableSeats, List<Seat> seats, Movie movieRef, Theater theater) {
+			int noOfAvailableSeats, Seat seats, Movie movieRef, Theater theater) {
 		super();
 		this.showId = showId;
 		this.showName = showName;
@@ -119,11 +122,11 @@ public class Show {
 		this.noOfAvailableSeats = noOfAvailableSeats;
 	}
 
-	public List<Seat> getSeats() {
+	public Seat getSeats() {
 		return seats;
 	}
 
-	public void setSeats(List<Seat> seats) {
+	public void setSeats(Seat seats) {
 		this.seats = seats;
 	}
 

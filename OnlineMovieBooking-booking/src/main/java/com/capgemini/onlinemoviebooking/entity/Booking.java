@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -22,18 +23,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Booking {
 	@Id
 	@Column(name="booking_id",length=6)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer bookingId;
 		
 	@ManyToOne
 	private Show showRef;
 	
 	@Column(name="booking_date",nullable=false)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate bookingDate;
 	
-	@Column
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int transactionalId;
+	@Column(name="transactional_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transactional_seq")
+	@SequenceGenerator(sequenceName = "transactional_seq", initialValue = 040101 , allocationSize = 1, name = "transactional_seq")
+	private long transactionalId;
 	
 	@Column(name="total_cost",nullable=false)
 	private Double totalCost;
@@ -49,7 +52,7 @@ public class Booking {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Booking(Integer bookingId, Show showRef, LocalDate bookingDate, int transactionalId, Double totalCost,
+	public Booking(Integer bookingId, Show showRef, LocalDate bookingDate, long transactionalId, Double totalCost,
 			int noOfSeats, String bookingStatus) {
 		super();
 		this.bookingId = bookingId;
@@ -85,11 +88,11 @@ public class Booking {
 		this.bookingDate = bookingDate;
 	}
 
-	public int getTransactionalId() {
+	public long getTransactionalId() {
 		return transactionalId;
 	}
 
-	public void setTransactionalId(int transactionalId) {
+	public void setTransactionalId(long transactionalId) {
 		this.transactionalId = transactionalId;
 	}
 

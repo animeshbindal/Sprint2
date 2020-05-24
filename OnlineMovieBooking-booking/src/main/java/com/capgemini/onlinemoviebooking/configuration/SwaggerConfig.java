@@ -26,7 +26,7 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
         return new Docket(DocumentationType.SWAGGER_2).select()
                 .apis(RequestHandlerSelectors.basePackage("com.capgemini.onlinemoviebooking.controller"))
                 .paths(regex(".*" + ".*")).build().enable(true)
-                .groupName("Online Movie Booking")
+                .groupName("Health Care Management")
                 .apiInfo(new ApiInfoBuilder().description("Online Movie Booking APIs")
                         .title("Online Movie Booking APIs").version("1.0.0.0").build());
 }

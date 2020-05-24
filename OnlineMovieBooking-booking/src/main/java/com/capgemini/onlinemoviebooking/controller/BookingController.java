@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -87,11 +88,11 @@ public class BookingController {
 		}
 	}
 	
-	@PutMapping("/CancleBooking/{id}")
+	@DeleteMapping("/CancleBooking/{id}")
 	public ResponseEntity<String> cancleBooking(@PathVariable int id){
 		Boolean result=bookingService.cancleBooking(id);
 		if(result) {
-			return new ResponseEntity<String>("Booking Canclled", HttpStatus.ACCEPTED);
+			return new ResponseEntity<String>("Booking Cancled", HttpStatus.ACCEPTED);
 		}
 		else
 			throw new BookingException("Booking Cancelation got rejected");
@@ -102,7 +103,7 @@ public class BookingController {
 		return new ResponseEntity<List<Booking>>(bookingService.showBookings(),HttpStatus.OK);
 	}
 	
-	@GetMapping("/getBooking/{id}")
+	@GetMapping("/getBooking/{bookingId}")
 	public ResponseEntity<Booking> getBooking(@PathVariable int bookingId){
 		Booking result=bookingService.showBooking(bookingId);
 		

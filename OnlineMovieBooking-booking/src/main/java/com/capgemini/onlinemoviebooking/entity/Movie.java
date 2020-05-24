@@ -40,58 +40,21 @@ public class Movie {
 	@NotEmpty(message="Movie director name should be Mandatory")
 	@Column(name="director", length=25,nullable=false)
 	private String director;
-	
-	
-	public int getMovieId() {
-		return movieId;
-	}
-
-
-	public void setMovieId(int movieId) {
-		this.movieId = movieId;
-	}
-
-
-	public String getMovieName() {
-		return movieName;
-	}
-
-
-	public void setMovieName(String movieName) {
-		this.movieName = movieName;
-	}
-
-
-
-
-	public String getDirector() {
-		return director;
-	}
-
-
-	public void setDirector(String director) {
-		this.director = director;
-	}
-
-
-	public Movie(int movieId, @NotEmpty(message = "Movie Name should be Mandatory") String movieName, String genre,
-			String language, @NotEmpty(message = "Movie director name should be Mandatory") String director
-		) {
-		super();
-		this.movieId = movieId;
-		this.movieName = movieName;
-		this.genre = genre;
-		this.language = language;
-		this.director = director;
-		
-	}
-
 
 	public Movie() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	public Movie(Integer movieId, @NotEmpty(message = "Movie Name should be Mandatory") String movieName, String genre,
+			String language, @NotEmpty(message = "Movie director name should be Mandatory") String director) {
+		super();
+		this.movieId = movieId;
+		this.movieName = movieName;
+		this.genre = genre;
+		this.language = language;
+		this.director = director;
+	}
 
 	@Override
 	public String toString() {
@@ -99,7 +62,46 @@ public class Movie {
 				+ ", director=" + director + "]";
 	}
 
+	public Integer getMovieId() {
+		return movieId;
+	}
 
+	public void setMovieId(Integer movieId) {
+		this.movieId = movieId;
+	}
+
+	public String getMovieName() {
+		return movieName;
+	}
+
+	public void setMovieName(String movieName) {
+		this.movieName = movieName;
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public String getDirector() {
+		return director;
+	}
+
+	public void setDirector(String director) {
+		this.director = director;
+	}
+	
 	
 }
 
