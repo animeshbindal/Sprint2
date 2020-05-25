@@ -26,7 +26,7 @@ import com.capgemini.onlinemoviebooking.entity.Show;
 import com.capgemini.onlinemoviebooking.exception.BookingException;
 import com.capgemini.onlinemoviebooking.service.BookingService;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class BookingController {
 	
